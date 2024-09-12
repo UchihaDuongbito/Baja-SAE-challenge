@@ -1,0 +1,24 @@
+def find_max_shock_speeds(position_data, time_interval):
+    # initialize maximum speeds
+    max_compression_speed = 0
+    max_expansion_speed = 0
+    
+    # loop through the position data to calculate speeds
+    for i in range(1, len(position_data)):
+        # calculate the speed between consecutive position readings
+        speed = (position_data[i] - position_data[i - 1]) / time_interval
+        
+        # check for compression (negative speed indicates compression)
+        if speed < 0:
+            compression_speed = abs(speed)
+            if compression_speed > max_compression_speed:
+                max_compression_speed = compression_speed
+        
+        # check for expansion (positive speed indicates expansion)
+        else:
+            expansion_speed = speed
+            if expansion_speed > max_expansion_speed:
+                max_expansion_speed = expansion_speed
+    
+    # return the maximum compression and expansion speeds
+    return max_expansion_speed, max_compression_speed
